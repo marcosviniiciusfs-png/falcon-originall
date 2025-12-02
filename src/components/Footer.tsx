@@ -3,7 +3,7 @@ import trajanoAbreuLogo from "@/assets/trajano-abreu-logo.png";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-[#010010] text-white">
+    <footer id="contato" className="bg-[#1c3a3e] text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
