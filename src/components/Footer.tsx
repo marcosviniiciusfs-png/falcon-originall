@@ -56,8 +56,8 @@ const Footer = () => {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
           <div className="space-y-2 text-white/90">
-            <p>Av dos Holandeses Nº4</p>
-            <p>Bairro: Calhau</p>
+            <p>FIM 28 Qd 34 Lt 02 G Nova Marabá</p>
+            <p>Em frente ao Burger King</p>
           </div>
         </div>
 
