@@ -7,20 +7,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import cliente1 from "@/assets/cliente-contemplado-1.png";
-import cliente2 from "@/assets/cliente-contemplado-2.png";
-import cliente3 from "@/assets/cliente-contemplado-3.png";
-import cliente4 from "@/assets/cliente-contemplado-4.png";
-import cliente5 from "@/assets/cliente-contemplado-5.png";
-import cliente6 from "@/assets/cliente-contemplado-6.png";
-import cliente7 from "@/assets/cliente-contemplado-7.png";
-import cliente8 from "@/assets/cliente-contemplado-8.png";
-import cliente9 from "@/assets/cliente-contemplado-9.png";
-import cliente10 from "@/assets/cliente-contemplado-10.png";
-import cliente11 from "@/assets/cliente-contemplado-11.png";
+import cliente1 from "@/assets/cliente-contemplado-1.jpeg";
+import cliente2 from "@/assets/cliente-contemplado-2.jpeg";
+import cliente3 from "@/assets/cliente-contemplado-3.jpeg";
+import cliente4 from "@/assets/cliente-contemplado-4.jpeg";
+import cliente5 from "@/assets/cliente-contemplado-5.jpeg";
+import cliente6 from "@/assets/cliente-contemplado-6.jpeg";
+import cliente7 from "@/assets/cliente-contemplado-7.jpeg";
+import cliente8 from "@/assets/cliente-contemplado-8.jpeg";
+import cliente9 from "@/assets/cliente-contemplado-9.jpeg";
+import cliente10 from "@/assets/cliente-contemplado-10.jpeg";
 
 const TestimonialsSection = () => {
-  const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente9, cliente8, cliente6, cliente7, cliente5, cliente11, cliente10];
+  const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente5, cliente6, cliente7, cliente8, cliente9, cliente10];
 
   return (
     <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
