@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import trajanoAbreuLogo from "@/assets/trajano-abreu-logo.png";
+import amRepresentacaoLogo from "@/assets/am-representacao-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#1c3a3e] border-b border-border/20 shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <img src={trajanoAbreuLogo} alt="Trajano Abreu Empreendimentos" className="h-12 w-auto" />
+          <img src={amRepresentacaoLogo} alt="AM Representação" className="h-12 w-auto" />
         </div>
 
         {/* Desktop Menu */}
