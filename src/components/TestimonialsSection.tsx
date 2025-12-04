@@ -7,15 +7,15 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import cliente1 from "@/assets/cliente-contemplado-1.jpeg";
-import cliente2 from "@/assets/cliente-contemplado-2.jpeg";
-import cliente3 from "@/assets/cliente-contemplado-3.jpeg";
-import cliente4 from "@/assets/cliente-contemplado-4.jpeg";
-import cliente5 from "@/assets/cliente-contemplado-5.jpeg";
-import cliente6 from "@/assets/cliente-contemplado-6.jpeg";
-import cliente7 from "@/assets/cliente-contemplado-7.jpeg";
-import cliente8 from "@/assets/cliente-contemplado-8.jpeg";
-import cliente9 from "@/assets/cliente-contemplado-9.jpeg";
+import cliente1 from "@/assets/cliente-novo-1.png";
+import cliente2 from "@/assets/cliente-novo-2.jpeg";
+import cliente3 from "@/assets/cliente-novo-3.jpeg";
+import cliente4 from "@/assets/cliente-novo-4.jpeg";
+import cliente5 from "@/assets/cliente-novo-5.jpeg";
+import cliente6 from "@/assets/cliente-novo-6.jpeg";
+import cliente7 from "@/assets/cliente-novo-7.jpeg";
+import cliente8 from "@/assets/cliente-novo-8.jpeg";
+import cliente9 from "@/assets/cliente-novo-9.jpeg";
 
 const TestimonialsSection = () => {
   const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente5, cliente6, cliente7, cliente8, cliente9];
