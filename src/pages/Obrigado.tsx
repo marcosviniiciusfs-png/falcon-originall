@@ -24,7 +24,7 @@ const Obrigado = () => {
     }
     
     if ((window as any).fbq) {
-      (window as any).fbq('init', '718694864158048');
+      (window as any).fbq('init', '24434572819567816');
       (window as any).fbq('track', 'PageView');
     }
   }, []);
