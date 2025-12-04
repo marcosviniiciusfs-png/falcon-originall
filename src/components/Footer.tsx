@@ -1,4 +1,4 @@
-import { Phone, Instagram, Facebook } from "lucide-react";
+import { Phone, Instagram, Facebook, Mail } from "lucide-react";
 import rnInvestimentosLogo from "@/assets/rn-investimentos-logo.png";
 
 const Footer = () => {
@@ -46,6 +46,12 @@ const Footer = () => {
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-white/90">CONTATO +55 67 99322-6694</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-white/90">rninvestimentosadm@gmail.com</p>
                 </div>
               </div>
             </div>
