@@ -47,8 +47,9 @@ const Footer = () => {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
           <div className="space-y-2 text-white/90">
-            <p>FIM 28 Qd 34 Lt 02 G Nova Marabá</p>
-            <p>Em frente ao Burger King</p>
+            <p>Rua Treze de Maio, 2500 - Centro</p>
+            <p>Complemento: 3º andar sala 303</p>
+            <p>CEP: 79002-923</p>
           </div>
         </div>
 
