@@ -9,7 +9,6 @@ interface HeroSectionProps {
 const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
   const benefits = [
     "100% Gratuito",
-    "Sem consulta ao SPC",
     "Resultado no WhatsApp",
     "Lojas em parceria"
   ];
