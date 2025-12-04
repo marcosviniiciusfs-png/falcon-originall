@@ -62,7 +62,7 @@ const TestimonialsSection = () => {
                       <img
                         src={image}
                         alt={`Cliente Contemplado ${index + 1}`}
-                        className="w-full h-[400px] object-cover"
+                        className="w-full h-[400px] object-cover object-top"
                       />
                     </div>
                   </div>
