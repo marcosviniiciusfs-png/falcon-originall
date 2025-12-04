@@ -112,7 +112,7 @@ const Simulator = () => {
       };
 
       // Enviar para o webhook
-      await fetch("https://hook.us1.make.com/etzypgyofqfdrfns0rvgczhnqncoljhc", {
+      await fetch("https://hook.us1.make.com/qrx99xtcq6vup9x4fjy6pd4gp6enk8v1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
