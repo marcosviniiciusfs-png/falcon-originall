@@ -41,8 +41,29 @@ const Simulator = () => {
     whatsapp: ""
   });
 
-  const totalSteps = 7;
-  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const getProgressInfo = () => {
+    const isShortFlow = formData.hasDownPayment === "Não";
+    
+    if (isShortFlow && currentStep >= 2) {
+      // Fluxo de 5 passos: 0, 1, 2, 5, 6
+      const stepMapping: { [key: number]: number } = { 0: 1, 1: 2, 2: 3, 5: 4, 6: 5 };
+      const displayStep = stepMapping[currentStep] || currentStep + 1;
+      return {
+        currentDisplay: displayStep,
+        totalDisplay: 5,
+        progress: (displayStep / 5) * 100
+      };
+    }
+    
+    return {
+      currentDisplay: currentStep + 1,
+      totalDisplay: 7,
+      progress: ((currentStep + 1) / 7) * 100
+    };
+  };
+
+  const progressInfo = getProgressInfo();
+  const isLastStep = currentStep === 6;
 
   const formatCurrency = (value: string) => {
     const numbers = value.replace(/\D/g, "");
@@ -76,15 +97,23 @@ const Simulator = () => {
   };
 
   const handleNext = () => {
+    // Se responder "Não" na entrada, pula direto para o nome (step 5)
     if (currentStep === 2 && formData.hasDownPayment === "Não") {
-      setFormData({ ...formData, downPaymentAmount: "" });
+      setFormData({ ...formData, downPaymentAmount: "", monthlyPayment: "", city: "" });
+      setCurrentStep(5);
+      return;
     }
-    if (currentStep < totalSteps - 1) {
+    if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
+    // Se está no nome e tinha respondido "Não", volta para entrada
+    if (currentStep === 5 && formData.hasDownPayment === "Não") {
+      setCurrentStep(2);
+      return;
+    }
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
@@ -106,9 +135,9 @@ const Simulator = () => {
         "WhatsApp": formData.whatsapp,
         "Tipo de Bem": formData.propertyType,
         "Valor Pretendido (R$)": formData.creditAmount,
-        "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não",
-        "Parcela Ideal (R$)": formData.monthlyPayment,
-        "Cidade": formData.city
+        "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui",
+        "Parcela Ideal (R$)": formData.monthlyPayment || "Não informado",
+        "Cidade": formData.city || "Não informado"
       };
 
       // Enviar para o webhook
@@ -322,9 +351,9 @@ const Simulator = () => {
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-10 space-y-8">
             <div className="space-y-3">
               <div className="flex justify-between text-sm font-medium text-foreground mb-1">
-                <span>{currentStep + 1} de {totalSteps}</span>
+                <span>{progressInfo.currentDisplay} de {progressInfo.totalDisplay}</span>
               </div>
-              <Progress value={progress} className="h-3" />
+              <Progress value={progressInfo.progress} className="h-3" />
             </div>
 
             <div className="min-h-[220px]">
@@ -342,7 +371,7 @@ const Simulator = () => {
                 Voltar
               </Button>
 
-              {currentStep < totalSteps - 1 ? (
+              {!isLastStep ? (
                 <Button
                   onClick={handleNext}
                   disabled={!canProceed()}
