@@ -310,13 +310,22 @@ const Simulator = () => {
             <Label htmlFor="monthlyPayment" className="text-lg font-semibold text-primary text-center block mb-6">
               Qual a parcela mensal ideal pra você?
             </Label>
-            <Input
-              id="monthlyPayment"
-              value={formData.monthlyPayment}
-              onChange={(e) => handleCurrencyChange("monthlyPayment", e.target.value)}
-              placeholder="R$ 0,00"
-              className="text-lg p-6 text-center max-w-md mx-auto"
-            />
+            <div className="max-w-md mx-auto">
+              <Select
+                value={formData.monthlyPayment}
+                onValueChange={(value) => setFormData({ ...formData, monthlyPayment: value })}
+              >
+                <SelectTrigger className="w-full text-lg p-6">
+                  <SelectValue placeholder="Selecione a parcela ideal" />
+                </SelectTrigger>
+                <SelectContent translate="no">
+                  <SelectItem value="R$ 1.100,00 a 1.600,00" translate="no">R$ 1.100,00 a 1.600,00</SelectItem>
+                  <SelectItem value="R$ 1.600,00 a 2.500,00" translate="no">R$ 1.600,00 a 2.500,00</SelectItem>
+                  <SelectItem value="R$ 2.500,00 a 3.500,00" translate="no">R$ 2.500,00 a 3.500,00</SelectItem>
+                  <SelectItem value="Acima de R$ 3.500,00" translate="no">Acima de R$ 3.500,00</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         );
 
