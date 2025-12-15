@@ -1,5 +1,5 @@
 import { Phone, Instagram, Facebook, Mail } from "lucide-react";
-import rnInvestimentosLogo from "@/assets/rn-investimentos-logo.png";
+import novaLogo from "@/assets/nova-logo.png";
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Logo */}
           <div>
             <div className="mb-6">
-              <img src={rnInvestimentosLogo} alt="RN Investimentos" className="h-12 w-auto" />
+              <img src={novaLogo} alt="RN Investimentos" className="h-12 w-auto" />
             </div>
           </div>
 
