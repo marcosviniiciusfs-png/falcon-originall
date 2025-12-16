@@ -18,7 +18,7 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Social</h3>
             <div className="flex gap-3">
               <a 
-                href="https://www.instagram.com/rninvestimentosoficial?igsh=dGwwZDBjc3ByYWMx" 
+                href="https://www.instagram.com/grupo_investbens/"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
