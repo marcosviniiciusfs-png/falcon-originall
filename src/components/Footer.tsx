@@ -45,7 +45,7 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-white/90">CONTATO +55 67 99322-6694</p>
+                  <p className="text-white/90">CONTATO +55 68 99283-0000</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -62,9 +62,8 @@ const Footer = () => {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
           <div className="space-y-2 text-white/90">
-            <p>Rua Treze de Maio, 2500 - Centro</p>
-            <p>Complemento: 3º andar sala 303</p>
-            <p>CEP: 79002-923</p>
+            <p>Estrada do Aviário, 546 - Aviário</p>
+            <p>CEP: 69900-854</p>
           </div>
         </div>
 
