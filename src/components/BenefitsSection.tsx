@@ -1,21 +1,25 @@
-import { MessageCircle, DollarSign, FileText } from "lucide-react";
+import { MessageCircle, FileText } from "lucide-react";
+import bancosParceiros from "@/assets/bancos-parceiros.png";
 
 const BenefitsSection = () => {
   const benefits = [
     {
       icon: MessageCircle,
       title: "Receba direto no WhatsApp",
-      description: "Sua simulação de crédito é enviada rapidamente para o seu WhatsApp com todas as informações necessárias."
+      description: "Sua simulação de crédito é enviada rapidamente para o seu WhatsApp com todas as informações necessárias.",
+      isImage: false
     },
     {
-      icon: DollarSign,
-      title: "Parcelas que cabem no seu bolso",
-      description: "Encontramos as melhores condições de financiamento com parcelas que se adequam ao seu orçamento."
+      icon: null,
+      title: "Bancos Parceiros",
+      description: "Trabalhamos com os principais bancos do mercado para oferecer as melhores condições de financiamento.",
+      isImage: true
     },
     {
       icon: FileText,
       title: "Simulação sem compromisso",
-      description: "Faça quantas simulações quiser, totalmente grátis e sem consulta ao SPC ou Serasa."
+      description: "Faça quantas simulações quiser, totalmente grátis e sem consulta ao SPC ou Serasa.",
+      isImage: false
     }
   ];
 
@@ -29,9 +33,19 @@ const BenefitsSection = () => {
               className="text-center animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-5 mx-auto">
-                <benefit.icon className="w-8 h-8 text-primary" />
-              </div>
+              {benefit.isImage ? (
+                <div className="mb-5 mx-auto">
+                  <img 
+                    src={bancosParceiros} 
+                    alt="Bancos Parceiros" 
+                    className="h-16 w-auto object-contain mx-auto"
+                  />
+                </div>
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-5 mx-auto">
+                  {benefit.icon && <benefit.icon className="w-8 h-8 text-primary" />}
+                </div>
+              )}
               <h3 className="text-lg font-bold text-foreground mb-2">
                 {benefit.title}
               </h3>
