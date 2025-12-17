@@ -38,7 +38,7 @@ const BenefitsSection = () => {
                   <img 
                     src={bancosParceiros} 
                     alt="Bancos Parceiros" 
-                    className="h-16 w-auto object-contain mx-auto"
+                    className="h-24 w-auto object-contain mx-auto"
                   />
                 </div>
               ) : (
