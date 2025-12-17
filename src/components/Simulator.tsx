@@ -292,7 +292,7 @@ const Simulator = () => {
                       <SelectValue placeholder="Selecione o valor de entrada" />
                     </SelectTrigger>
                     <SelectContent translate="no">
-                      <SelectItem value="Entrada de 12k a 20 mil" translate="no">Entrada de 12k a 20 mil</SelectItem>
+                      <SelectItem value="12 a 20 mil" translate="no">12 a 20 mil</SelectItem>
                       <SelectItem value="20 a 30 mil" translate="no">20 a 30 mil</SelectItem>
                       <SelectItem value="30 a 40 mil" translate="no">30 a 40 mil</SelectItem>
                       <SelectItem value="Acima de 40 mil" translate="no">Acima de 40 mil</SelectItem>
