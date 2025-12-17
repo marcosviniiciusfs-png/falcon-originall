@@ -3,20 +3,20 @@ import grupoInvestbensLogo from "@/assets/grupo-investbens-logo.png";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-gradient-to-b from-[#dbecf2] via-[#dbecf2] via-[50%] to-primary to-[95%] md:via-[25%] md:to-[60%]">
+    <footer id="contato" className="bg-gradient-to-b from-[#dbecf2] via-[#dbecf2] via-[50%] to-primary to-[95%] md:bg-[#dbecf2] md:bg-none">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
-          <div>
-            <div className="mb-6">
+          <div className="text-center md:text-left">
+            <div className="mb-6 flex justify-center md:justify-start">
               <img src={grupoInvestbensLogo} alt="Grupo Investbens" className="h-12 w-auto" />
             </div>
           </div>
 
           {/* Social */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-lg font-bold mb-4 text-primary">Social</h3>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center md:justify-start">
               <a 
                 href="https://www.instagram.com/grupo_investbens/"
                 target="_blank" 
@@ -60,15 +60,15 @@ const Footer = () => {
 
         {/* Endereço */}
         <div className="mb-8">
-          <h3 className="text-lg font-bold mb-4 text-white">Nosso endereço</h3>
-          <div className="space-y-2 text-white/90">
+          <h3 className="text-lg font-bold mb-4 text-white md:text-primary">Nosso endereço</h3>
+          <div className="space-y-2 text-white/90 md:text-primary/80">
             <p>Estrada do Aviário, 546 - Aviário</p>
             <p>CEP: 69900-854</p>
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-6 text-center">
-          <p className="text-white/80 text-sm">
+        <div className="border-t border-white/20 md:border-primary/20 pt-6 text-center">
+          <p className="text-white/80 md:text-primary/80 text-sm">
             Copyright 2025 - Todos os direitos reservados por SimuLead
           </p>
         </div>
