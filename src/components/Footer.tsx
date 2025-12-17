@@ -3,7 +3,7 @@ import grupoInvestbensLogo from "@/assets/grupo-investbens-logo.png";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-gradient-to-b from-[#dbecf2] via-[#dbecf2] via-[15%] to-primary to-[50%]">
+    <footer id="contato" className="bg-gradient-to-b from-[#dbecf2] via-[#dbecf2] via-[50%] to-primary to-[95%] md:via-[25%] md:to-[60%]">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
