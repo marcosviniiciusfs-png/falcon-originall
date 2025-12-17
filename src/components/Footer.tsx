@@ -3,7 +3,7 @@ import grupoInvestbensLogo from "@/assets/grupo-investbens-logo.png";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-primary text-white">
+    <footer id="contato" className="bg-gradient-to-b from-white via-white via-[15%] to-primary to-[50%]">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
@@ -15,13 +15,13 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Social</h3>
+            <h3 className="text-lg font-bold mb-4 text-primary">Social</h3>
             <div className="flex gap-3">
               <a 
                 href="https://www.instagram.com/grupo_investbens/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors text-primary"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -30,7 +30,7 @@ const Footer = () => {
                 href="https://www.facebook.com/grupoinvestbens"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors text-primary"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -40,18 +40,18 @@ const Footer = () => {
 
           {/* Fale Conosco */}
           <div>
-          <h3 className="text-lg font-bold mb-4">Fale conosco</h3>
+          <h3 className="text-lg font-bold mb-4 text-primary">Fale conosco</h3>
             <div className="space-y-3">
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 text-primary">
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-white/90">CONTATO +55 68 99283-0000</p>
+                  <p className="text-primary/80">CONTATO +55 68 99283-0000</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 text-primary">
                 <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-white/90">rninvestimentosadm@gmail.com</p>
+                  <p className="text-primary/80">rninvestimentosadm@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Footer = () => {
 
         {/* Endereço */}
         <div className="mb-8">
-          <h3 className="text-lg font-bold mb-4">Nosso endereço</h3>
+          <h3 className="text-lg font-bold mb-4 text-white">Nosso endereço</h3>
           <div className="space-y-2 text-white/90">
             <p>Estrada do Aviário, 546 - Aviário</p>
             <p>CEP: 69900-854</p>
