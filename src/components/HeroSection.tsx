@@ -10,7 +10,7 @@ const HeroSection = ({ onSimulateClick }: HeroSectionProps) => {
   const benefits = [
     "100% Gratuito",
     "Resultado no WhatsApp",
-    "Lojas em parceria"
+    "Mais de 50 instituições financeiras"
   ];
 
   return (

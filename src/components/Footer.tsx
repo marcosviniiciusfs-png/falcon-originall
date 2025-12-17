@@ -62,6 +62,7 @@ const Footer = () => {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4 text-white md:text-primary">Nosso endereço</h3>
           <div className="space-y-2 text-white/90 md:text-primary/80">
+            <p>Rio Branco - Acre</p>
             <p>Estrada do Aviário, 546 - Aviário</p>
             <p>CEP: 69900-854</p>
           </div>
