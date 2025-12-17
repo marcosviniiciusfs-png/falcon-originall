@@ -29,7 +29,7 @@ const Obrigado = () => {
     }
   }, []);
 
-  const whatsappLink = "https://wa.me/5568992830000?text=Ol%C3%A1%2C+respondi+as+perguntas+e+tenho+interesse+em+adiantar+minha+simula%C3%A7%C3%A3o%21";
+  const whatsappLink = "https://wa.me/556892120104?text=Ol%C3%A1%2C+respondi+as+perguntas+e+tenho+interesse+em+adiantar+minha+simula%C3%A7%C3%A3o%21";
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-8">
