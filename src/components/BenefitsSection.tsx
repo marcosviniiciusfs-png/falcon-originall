@@ -12,7 +12,7 @@ const BenefitsSection = () => {
     {
       icon: null,
       title: "Bancos Parceiros",
-      description: "Trabalhamos com os principais bancos do mercado para oferecer as melhores condições de financiamento.",
+      description: "Trabalhamos com os principais bancos do mercado para oferecer as melhores condições para nossos clientes.",
       isImage: true
     },
     {
