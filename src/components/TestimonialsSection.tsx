@@ -10,9 +10,19 @@ import Autoplay from "embla-carousel-autoplay";
 import cliente1 from "@/assets/cliente-falcon-1.jpeg";
 import cliente2 from "@/assets/cliente-falcon-2.jpeg";
 import cliente3 from "@/assets/cliente-falcon-3.jpeg";
+import cliente10 from "@/assets/cliente-novo-10.jpeg";
+import cliente11 from "@/assets/cliente-novo-11.jpeg";
+import cliente12 from "@/assets/cliente-novo-12.jpeg";
+import cliente13 from "@/assets/cliente-novo-13.jpeg";
+import cliente14 from "@/assets/cliente-novo-14.jpeg";
+import cliente15 from "@/assets/cliente-novo-15.jpeg";
+import cliente16 from "@/assets/cliente-novo-16.jpeg";
+import cliente17 from "@/assets/cliente-novo-17.jpeg";
+import cliente18 from "@/assets/cliente-novo-18.jpeg";
+import cliente19 from "@/assets/cliente-novo-19.jpeg";
 
 const TestimonialsSection = () => {
-  const clientImages = [cliente1, cliente2, cliente3];
+  const clientImages = [cliente1, cliente2, cliente3, cliente10, cliente11, cliente12, cliente13, cliente14, cliente15, cliente16, cliente17, cliente18, cliente19];
 
   return (
     <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
