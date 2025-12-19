@@ -3,7 +3,7 @@ import falconLogo from "@/assets/falcon-logo.jpg";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-primary">
+    <footer id="contato" className="bg-[#002059]">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
