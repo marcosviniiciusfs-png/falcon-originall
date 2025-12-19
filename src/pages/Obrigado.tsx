@@ -29,8 +29,6 @@ const Obrigado = () => {
     }
   }, []);
 
-  const whatsappLink = "https://api.whatsapp.com/send/?phone=556892120104&text=Ol%C3%A1%2C+respondi+as+perguntas+e+tenho+interesse+em+adiantar+minha+simula%C3%A7%C3%A3o%21&type=phone_number&app_absent=0";
-
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-8">
       <div className="max-w-md w-full text-center space-y-6">
@@ -45,24 +43,8 @@ const Obrigado = () => {
         <p className="text-lg text-muted-foreground">
           Sua solicitação foi enviada com sucesso! Em breve entraremos em contato.
         </p>
-
-        <div className="bg-muted/50 rounded-lg p-6 space-y-4 border border-border">
-          <p className="text-foreground font-medium">
-            🚀 A sua simulação está em análise, mas se você quiser furar a fila e ter um atendimento mais rápido, clique no botão abaixo e entre em contato pelo WhatsApp.
-          </p>
-          
-          <Button 
-            asChild
-            size="lg"
-            className="w-full bg-[#25D366] hover:bg-[#20BD5A] text-white"
-          >
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              📱 Falar pelo WhatsApp
-            </a>
-          </Button>
-        </div>
         
-        <Button 
+        <Button
           onClick={() => navigate("/")}
           variant="outline"
           size="lg"
