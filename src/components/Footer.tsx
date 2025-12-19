@@ -1,4 +1,4 @@
-import { Phone, Instagram, Facebook, Mail } from "lucide-react";
+import { Phone, Instagram } from "lucide-react";
 import falconLogo from "@/assets/falcon-logo.jpg";
 
 const Footer = () => {
@@ -18,7 +18,7 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4 text-white">Social</h3>
             <div className="flex gap-3 justify-center md:justify-start">
               <a 
-                href="https://www.instagram.com/grupo_investbens/"
+                href="https://www.instagram.com/falcon_empreendimentos1/"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-white"
@@ -26,33 +26,16 @@ const Footer = () => {
               >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a 
-                href="https://www.facebook.com/grupoinvestbens"
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-white"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
             </div>
           </div>
 
           {/* Fale Conosco */}
           <div>
             <h3 className="text-lg font-bold mb-4 text-white">Fale conosco</h3>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 text-white">
-                <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-white/80">+55 41 99264-8895</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 text-white">
-                <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-white/80">rninvestimentosadm@gmail.com</p>
-                </div>
+            <div className="flex items-start gap-3 text-white">
+              <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
+              <div>
+                <p className="text-white/80">+55 41 99264-8895</p>
               </div>
             </div>
           </div>
