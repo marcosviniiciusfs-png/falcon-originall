@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,6 +29,7 @@ interface SimulatorData {
 
 const Simulator = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [formData, setFormData] = useState<SimulatorData>({
@@ -123,6 +124,10 @@ const Simulator = () => {
   };
 
   const handleFinish = async () => {
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
     try {
       // Formatar data no formato YYYY-MM-DD
       const now = new Date();
@@ -162,6 +167,7 @@ const Simulator = () => {
       navigate("/obrigado");
     } catch (error) {
       console.error("Erro ao enviar simulação:", error);
+      setIsSubmitting(false);
       toast({
         title: "Erro ao enviar simulação",
         description: "Por favor, tente novamente.",
@@ -438,10 +444,17 @@ const Simulator = () => {
               ) : (
                 <Button
                   onClick={handleFinish}
-                  disabled={!canProceed()}
+                  disabled={!canProceed() || isSubmitting}
                   className="bg-primary hover:bg-primary-hover px-8 py-6 text-base font-semibold"
                 >
-                  Finalizar Simulação
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Finalizar Simulação"
+                  )}
                 </Button>
               )}
             </div>
