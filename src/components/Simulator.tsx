@@ -147,15 +147,14 @@ const Simulator = () => {
         "Nome Completo": formData.fullName,
         "WhatsApp": formData.whatsapp,
         "Tipo de Bem": formData.propertyType,
-        "Valor Pretendido": formData.creditAmount || "Não informado",
-        "Modalidade de Crédito": formData.creditModality || "Não informado",
-        "Valor de Entrada": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui",
-        "Parcela Ideal": formData.monthlyPayment || "Não informado",
+        "Valor Pretendido (R$)": formData.creditAmount || "Não informado",
+        "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui entrada",
+        "Parcela Ideal (R$)": formData.monthlyPayment || "Não informado",
         "Cidade": formData.city || "Não informado"
       };
 
       // Enviar para o webhook
-      await fetch("https://hook.us1.make.com/6r6jln0cb3mrsdve0cf1xpaf8uhv3zbl", {
+      await fetch("https://hook.us1.make.com/3s8saehot3tbxrg0gsohavxhag4bzjkh", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
