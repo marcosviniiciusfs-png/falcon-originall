@@ -7,14 +7,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import cliente1 from "@/assets/cliente-investbens-1.jpeg";
-import cliente2 from "@/assets/cliente-novo-2.jpeg";
-import cliente3 from "@/assets/cliente-novo-3.jpeg";
-import cliente4 from "@/assets/cliente-novo-4.jpeg";
-import cliente5 from "@/assets/cliente-novo-5.jpeg";
+import cliente1 from "@/assets/cliente-falcon-1.jpeg";
+import cliente2 from "@/assets/cliente-falcon-2.jpeg";
+import cliente3 from "@/assets/cliente-falcon-3.jpeg";
 
 const TestimonialsSection = () => {
-  const clientImages = [cliente1, cliente2, cliente3, cliente4, cliente5];
+  const clientImages = [cliente1, cliente2, cliente3];
 
   return (
     <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
