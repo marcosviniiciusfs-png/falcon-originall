@@ -1,27 +1,27 @@
 import { Phone, Instagram, Facebook, Mail } from "lucide-react";
-import grupoInvestbensLogo from "@/assets/grupo-investbens-logo.png";
+import falconLogo from "@/assets/falcon-logo.jpg";
 
 const Footer = () => {
   return (
-    <footer id="contato" className="bg-gradient-to-b from-[#dbecf2] via-[#dbecf2] via-[50%] to-primary to-[95%] md:bg-[#dbecf2] md:bg-none">
+    <footer id="contato" className="bg-primary">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* Logo */}
           <div className="text-center md:text-left">
             <div className="mb-6 flex justify-center md:justify-start">
-              <img src={grupoInvestbensLogo} alt="Grupo Investbens" className="h-12 w-auto" />
+              <img src={falconLogo} alt="Falcon Empreendimentos e Negócios" className="h-16 w-auto rounded" />
             </div>
           </div>
 
           {/* Social */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-bold mb-4 text-primary">Social</h3>
+            <h3 className="text-lg font-bold mb-4 text-white">Social</h3>
             <div className="flex gap-3 justify-center md:justify-start">
               <a 
                 href="https://www.instagram.com/grupo_investbens/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors text-primary"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-white"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -30,7 +30,7 @@ const Footer = () => {
                 href="https://www.facebook.com/grupoinvestbens"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors text-primary"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-white"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -40,18 +40,18 @@ const Footer = () => {
 
           {/* Fale Conosco */}
           <div>
-          <h3 className="text-lg font-bold mb-4 text-primary">Fale conosco</h3>
+            <h3 className="text-lg font-bold mb-4 text-white">Fale conosco</h3>
             <div className="space-y-3">
-              <div className="flex items-start gap-3 text-primary">
+              <div className="flex items-start gap-3 text-white">
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-primary/80">CONTATO +55 68 99283-0000</p>
+                  <p className="text-white/80">CONTATO +55 68 99283-0000</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 text-primary">
+              <div className="flex items-start gap-3 text-white">
                 <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-primary/80">rninvestimentosadm@gmail.com</p>
+                  <p className="text-white/80">rninvestimentosadm@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -60,17 +60,17 @@ const Footer = () => {
 
         {/* Endereço */}
         <div className="mb-8">
-          <h3 className="text-lg font-bold mb-4 text-white md:text-primary">Nosso endereço</h3>
-          <div className="space-y-2 text-white/90 md:text-primary/80">
+          <h3 className="text-lg font-bold mb-4 text-white">Nosso endereço</h3>
+          <div className="space-y-2 text-white/80">
             <p>Rio Branco - Acre</p>
             <p>Estrada do Aviário, 546 - Aviário</p>
             <p>CEP: 69900-854</p>
           </div>
         </div>
 
-        <div className="border-t border-white/20 md:border-primary/20 pt-6 text-center">
-          <p className="text-white/80 md:text-primary/80 text-sm">
-            Copyright 2025 - Todos os direitos reservados por SimuLead
+        <div className="border-t border-white/20 pt-6 text-center">
+          <p className="text-white/80 text-sm">
+            Copyright 2025 - Todos os direitos reservados por Falcon Empreendimentos
           </p>
         </div>
       </div>
