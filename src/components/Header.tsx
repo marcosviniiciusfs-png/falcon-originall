@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import grupoInvestbensLogo from "@/assets/grupo-investbens-logo.png";
+import falconLogo from "@/assets/falcon-logo.jpg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,10 +15,10 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-white via-white via-[25%] to-primary to-[95%] md:via-[20%] md:to-[35%] border-b border-border/20 shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-primary border-b border-border/20 shadow-sm">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
-          <img src={grupoInvestbensLogo} alt="Grupo Investbens" className="h-12 w-auto" />
+          <img src={falconLogo} alt="Falcon Empreendimentos e Negócios" className="h-14 w-auto rounded" />
         </div>
 
         {/* Desktop Menu */}
