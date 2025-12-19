@@ -47,26 +47,27 @@ const Simulator = () => {
   const getProgressInfo = () => {
     const isShortFlow = formData.hasDownPayment === "Não";
     
-    if (isShortFlow && currentStep >= 3) {
-      // Fluxo de 6 passos: 0, 1, 2, 3, 6, 7
-      const stepMapping: { [key: number]: number } = { 0: 1, 1: 2, 2: 3, 3: 4, 6: 5, 7: 6 };
-      const displayStep = stepMapping[currentStep] || currentStep + 1;
+    if (isShortFlow) {
+      // Fluxo curto: 4 passos (tipo de bem, entrada, nome, telefone)
+      // Steps reais: 0, 1, 7, 8
+      const stepMapping: { [key: number]: number } = { 0: 1, 1: 2, 7: 3, 8: 4 };
+      const displayStep = stepMapping[currentStep] || 1;
       return {
         currentDisplay: displayStep,
-        totalDisplay: 6,
-        progress: (displayStep / 6) * 100
+        totalDisplay: 4,
+        progress: (displayStep / 4) * 100
       };
     }
     
     return {
       currentDisplay: currentStep + 1,
-      totalDisplay: 8,
-      progress: ((currentStep + 1) / 8) * 100
+      totalDisplay: 9,
+      progress: ((currentStep + 1) / 9) * 100
     };
   };
 
   const progressInfo = getProgressInfo();
-  const isLastStep = currentStep === 7;
+  const isLastStep = currentStep === 8;
 
   const formatCurrency = (value: string) => {
     const numbers = value.replace(/\D/g, "");
@@ -85,37 +86,41 @@ const Simulator = () => {
   const canProceed = () => {
     switch (currentStep) {
       case 0: return formData.propertyType !== "";
-      case 1: return formData.creditAmount !== "";
-      case 2: return formData.creditModality !== "";
-      case 3: 
-        if (formData.hasDownPayment === "Sim") {
-          return formData.downPaymentAmount !== "";
-        }
-        return formData.hasDownPayment !== "";
-      case 4: return formData.monthlyPayment !== "";
-      case 5: return formData.city.trim() !== "";
-      case 6: return formData.fullName.trim() !== "";
-      case 7: return formData.whatsapp.replace(/\D/g, "").length === 11;
+      case 1: return formData.hasDownPayment !== "";
+      case 2: return formData.creditAmount !== "";
+      case 3: return formData.downPaymentAmount !== "";
+      case 4: return formData.creditModality !== "";
+      case 5: return formData.monthlyPayment !== "";
+      case 6: return formData.city.trim() !== "";
+      case 7: return formData.fullName.trim() !== "";
+      case 8: return formData.whatsapp.replace(/\D/g, "").length === 11;
       default: return false;
     }
   };
 
   const handleNext = () => {
-    // Se responder "Não" na entrada, pula direto para o nome (step 6)
-    if (currentStep === 3 && formData.hasDownPayment === "Não") {
-      setFormData({ ...formData, downPaymentAmount: "", monthlyPayment: "", city: "" });
-      setCurrentStep(6);
+    // Se responder "Não" na entrada (step 1), pula direto para o nome (step 7)
+    if (currentStep === 1 && formData.hasDownPayment === "Não") {
+      setFormData({ 
+        ...formData, 
+        creditAmount: "", 
+        downPaymentAmount: "", 
+        creditModality: "",
+        monthlyPayment: "", 
+        city: "" 
+      });
+      setCurrentStep(7);
       return;
     }
-    if (currentStep < 7) {
+    if (currentStep < 8) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
-    // Se está no nome e tinha respondido "Não", volta para entrada
-    if (currentStep === 6 && formData.hasDownPayment === "Não") {
-      setCurrentStep(3);
+    // Se está no nome (step 7) e tinha respondido "Não", volta para entrada (step 1)
+    if (currentStep === 7 && formData.hasDownPayment === "Não") {
+      setCurrentStep(1);
       return;
     }
     if (currentStep > 0) {
@@ -142,8 +147,8 @@ const Simulator = () => {
         "Nome Completo": formData.fullName,
         "WhatsApp": formData.whatsapp,
         "Tipo de Bem": formData.propertyType,
-        "Valor Pretendido": formData.creditAmount,
-        "Modalidade de Crédito": formData.creditModality,
+        "Valor Pretendido": formData.creditAmount || "Não informado",
+        "Modalidade de Crédito": formData.creditModality || "Não informado",
         "Valor de Entrada": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui",
         "Parcela Ideal": formData.monthlyPayment || "Não informado",
         "Cidade": formData.city || "Não informado"
@@ -210,55 +215,6 @@ const Simulator = () => {
         return (
           <div className="space-y-4">
             <Label className="text-lg font-semibold text-primary text-center block mb-6">
-              Qual o valor do crédito que deseja simular?
-            </Label>
-            <div className="max-w-md mx-auto">
-              <Select
-                value={formData.creditAmount}
-                onValueChange={(value) => setFormData({ ...formData, creditAmount: value })}
-              >
-                <SelectTrigger className="w-full text-lg p-6">
-                  <SelectValue placeholder="Selecione o valor do crédito" />
-                </SelectTrigger>
-                <SelectContent translate="no">
-                  <SelectItem value="De R$ 100.000 à 250 mil" translate="no">De R$ 100.000 à 250 mil</SelectItem>
-                  <SelectItem value="De R$ 250.000 à 300 mil" translate="no">De R$ 250.000 à 300 mil</SelectItem>
-                  <SelectItem value="De R$ 300.000 à 500 mil" translate="no">De R$ 300.000 à 500 mil</SelectItem>
-                  <SelectItem value="Acima de 550 mil" translate="no">Acima de 550 mil</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        );
-
-      case 2:
-        return (
-          <div className="space-y-4">
-            <Label className="text-lg font-semibold text-primary text-center block mb-6">
-              Modalidade de crédito para compra do bem?
-            </Label>
-            <div className="max-w-md mx-auto">
-              <Select
-                value={formData.creditModality}
-                onValueChange={(value) => setFormData({ ...formData, creditModality: value })}
-              >
-                <SelectTrigger className="w-full text-lg p-6">
-                  <SelectValue placeholder="Selecione a modalidade" />
-                </SelectTrigger>
-                <SelectContent translate="no">
-                  <SelectItem value="Sem preferência" translate="no">Sem preferência</SelectItem>
-                  <SelectItem value="Consórcio" translate="no">Consórcio</SelectItem>
-                  <SelectItem value="Financiamento" translate="no">Financiamento</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-4">
-            <Label className="text-lg font-semibold text-primary text-center block mb-6">
               Tem valor de entrada?
             </Label>
             <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
@@ -283,34 +239,84 @@ const Simulator = () => {
                 <span className="text-base font-normal">Não</span>
               </button>
             </div>
-            
-            {formData.hasDownPayment === "Sim" && (
-              <div className="space-y-3 mt-6">
-                <Label className="text-sm text-muted-foreground">
-                  Qual valor de entrada disponível?
-                </Label>
-                <div className="max-w-md mx-auto">
-                  <Select
-                    value={formData.downPaymentAmount}
-                    onValueChange={(value) => setFormData({ ...formData, downPaymentAmount: value })}
-                  >
-                    <SelectTrigger className="w-full text-lg p-6">
-                      <SelectValue placeholder="Selecione o valor de entrada" />
-                    </SelectTrigger>
-                    <SelectContent translate="no">
-                      <SelectItem value="12 a 20 mil" translate="no">12 a 20 mil</SelectItem>
-                      <SelectItem value="20 a 30 mil" translate="no">20 a 30 mil</SelectItem>
-                      <SelectItem value="30 a 40 mil" translate="no">30 a 40 mil</SelectItem>
-                      <SelectItem value="Acima de 40 mil" translate="no">Acima de 40 mil</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            )}
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold text-primary text-center block mb-6">
+              Qual o valor do crédito que deseja simular?
+            </Label>
+            <div className="max-w-md mx-auto">
+              <Select
+                value={formData.creditAmount}
+                onValueChange={(value) => setFormData({ ...formData, creditAmount: value })}
+              >
+                <SelectTrigger className="w-full text-lg p-6">
+                  <SelectValue placeholder="Selecione o valor do crédito" />
+                </SelectTrigger>
+                <SelectContent translate="no">
+                  <SelectItem value="De R$ 100.000 à 250 mil" translate="no">De R$ 100.000 à 250 mil</SelectItem>
+                  <SelectItem value="De R$ 250.000 à 300 mil" translate="no">De R$ 250.000 à 300 mil</SelectItem>
+                  <SelectItem value="De R$ 300.000 à 500 mil" translate="no">De R$ 300.000 à 500 mil</SelectItem>
+                  <SelectItem value="Acima de 550 mil" translate="no">Acima de 550 mil</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold text-primary text-center block mb-6">
+              Qual valor de entrada disponível?
+            </Label>
+            <div className="max-w-md mx-auto">
+              <Select
+                value={formData.downPaymentAmount}
+                onValueChange={(value) => setFormData({ ...formData, downPaymentAmount: value })}
+              >
+                <SelectTrigger className="w-full text-lg p-6">
+                  <SelectValue placeholder="Selecione o valor de entrada" />
+                </SelectTrigger>
+                <SelectContent translate="no">
+                  <SelectItem value="12 a 20 mil" translate="no">12 a 20 mil</SelectItem>
+                  <SelectItem value="20 a 30 mil" translate="no">20 a 30 mil</SelectItem>
+                  <SelectItem value="30 a 40 mil" translate="no">30 a 40 mil</SelectItem>
+                  <SelectItem value="Acima de 40 mil" translate="no">Acima de 40 mil</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         );
 
       case 4:
+        return (
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold text-primary text-center block mb-6">
+              Modalidade de crédito para compra do bem?
+            </Label>
+            <div className="max-w-md mx-auto">
+              <Select
+                value={formData.creditModality}
+                onValueChange={(value) => setFormData({ ...formData, creditModality: value })}
+              >
+                <SelectTrigger className="w-full text-lg p-6">
+                  <SelectValue placeholder="Selecione a modalidade" />
+                </SelectTrigger>
+                <SelectContent translate="no">
+                  <SelectItem value="Sem preferência" translate="no">Sem preferência</SelectItem>
+                  <SelectItem value="Consórcio" translate="no">Consórcio</SelectItem>
+                  <SelectItem value="Financiamento" translate="no">Financiamento</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+
+      case 5:
         return (
           <div className="space-y-4">
             <Label htmlFor="monthlyPayment" className="text-lg font-semibold text-primary text-center block mb-6">
@@ -335,7 +341,7 @@ const Simulator = () => {
           </div>
         );
 
-      case 5:
+      case 6:
         return (
           <div className="space-y-4">
             <Label htmlFor="city" className="text-lg font-semibold text-primary text-center block mb-6">
@@ -351,7 +357,7 @@ const Simulator = () => {
           </div>
         );
 
-      case 6:
+      case 7:
         return (
           <div className="space-y-4">
             <Label htmlFor="fullName" className="text-lg font-semibold text-primary text-center block mb-6">
@@ -367,7 +373,7 @@ const Simulator = () => {
           </div>
         );
 
-      case 7:
+      case 8:
         return (
           <div className="space-y-4">
             <Label htmlFor="whatsapp" className="text-lg font-semibold text-primary text-center block mb-6">
