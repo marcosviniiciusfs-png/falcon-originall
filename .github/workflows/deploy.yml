@@ -28,6 +28,8 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+        env:
+          VITE_BASE_PATH: /falcon-originall/
 
       - uses: actions/configure-pages@v5
 
