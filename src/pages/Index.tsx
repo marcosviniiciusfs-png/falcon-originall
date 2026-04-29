@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import Simulator from "@/components/Simulator";
 import BenefitsSection from "@/components/BenefitsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CommentsSection from "@/components/CommentsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -47,6 +48,7 @@ const Index = () => {
         <Simulator />
         <BenefitsSection />
         <TestimonialsSection />
+        <CommentsSection />
       </main>
       <Footer />
     </div>
