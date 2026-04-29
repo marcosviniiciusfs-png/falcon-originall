@@ -109,6 +109,23 @@ const CommentsSection = () => {
           </p>
         </div>
 
+        <div className="max-w-3xl mx-auto mb-12">
+          <div className="relative rounded-2xl overflow-hidden shadow-xl bg-black aspect-video">
+            <video
+              src={`${import.meta.env.BASE_URL}videos/depoimento.mp4`}
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover"
+            >
+              Seu navegador não suporta a reprodução de vídeo.
+            </video>
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-3">
+            Depoimento em vídeo de cliente contemplado
+          </p>
+        </div>
+
         <div className="max-w-4xl mx-auto grid gap-5 md:grid-cols-2">
           {comments.map((comment, index) => (
             <article
