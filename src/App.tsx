@@ -3,14 +3,20 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import Obrigado from "./pages/Obrigado";
 import NotFound from "./pages/NotFound";
+import { initializeMetaPixel } from "./lib/meta";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+const App = () => {
+  useEffect(() => {
+    initializeMetaPixel();
+  }, []);
+
+  return <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -23,7 +29,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </QueryClientProvider>
-);
+  </QueryClientProvider>;
+};
 
 export default App;

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import InputMask from "react-input-mask";
+import { createEventId, trackLead } from "@/lib/meta";
 import {
   Select,
   SelectContent,
@@ -69,18 +69,11 @@ const Simulator = () => {
   const progressInfo = getProgressInfo();
   const isLastStep = currentStep === 8;
 
-  const formatCurrency = (value: string) => {
-    const numbers = value.replace(/\D/g, "");
-    const amount = Number(numbers) / 100;
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    }).format(amount);
-  };
-
-  const handleCurrencyChange = (field: keyof SimulatorData, value: string) => {
-    const formatted = formatCurrency(value);
-    setFormData({ ...formData, [field]: formatted });
+  const formatWhatsapp = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits.replace(/^(\d{0,2})/, "($1");
+    if (digits.length <= 7) return digits.replace(/^(\d{2})(\d+)/, "($1) $2");
+    return digits.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
   };
 
   const canProceed = () => {
@@ -141,7 +134,9 @@ const Simulator = () => {
       const year = now.getFullYear();
       const dataEntrada = `${year}-${month}-${day}`;
       
-      // Preparar dados para envio
+      const eventId = createEventId();
+      const endpoint = import.meta.env.VITE_META_CAPI_URL ||
+        "https://hook.us1.make.com/3s8saehot3tbxrg0gsohavxhag4bzjkh";
       const webhookData = {
         "Data de Entrada": dataEntrada,
         "Nome Completo": formData.fullName,
@@ -150,17 +145,47 @@ const Simulator = () => {
         "Valor Pretendido (R$)": formData.creditAmount || "Não informado",
         "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui entrada",
         "Parcela Ideal (R$)": formData.monthlyPayment || "Não informado",
-        "Cidade": formData.city || "Não informado"
+        "Cidade": formData.city || "Não informado",
+        "Modalidade de Crédito": formData.creditModality || "Não informado",
+        origem: "simulador_falcon",
+        event_id: eventId,
+        source_url: window.location.href,
+        received_at: now.toISOString()
       };
 
-      // Enviar para o webhook
-      await fetch("https://hook.us1.make.com/3s8saehot3tbxrg0gsohavxhag4bzjkh", {
+      const isCapiEndpoint = Boolean(import.meta.env.VITE_META_CAPI_URL);
+      const payload = isCapiEndpoint ? {
+        event_name: "Lead",
+        event_id: eventId,
+        event_source_url: window.location.href,
+        lead_data: webhookData,
+        user_data: {
+          ph: formData.whatsapp,
+          fn: formData.fullName.trim().split(/\s+/)[0] || "",
+          ln: formData.fullName.trim().split(/\s+/).slice(1).join(" "),
+          ct: formData.city,
+        },
+        custom_data: {
+          content_name: "Simulador Falcon",
+          lead_type: "simulador_falcon",
+          tipo_bem: formData.propertyType,
+        },
+      } : webhookData;
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(webhookData),
+        body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+        throw new Error(`Falha ao registrar lead (${response.status}).`);
+      }
+
+      trackLead(eventId);
+      sessionStorage.setItem("lead_submission_success", "true");
 
       toast({
         title: "Simulação enviada!",
@@ -168,7 +193,7 @@ const Simulator = () => {
       });
 
       // Redirecionar para página de agradecimento
-      navigate("/obrigado");
+      navigate("/obrigado", { replace: true });
     } catch (error) {
       console.error("Erro ao enviar simulação:", error);
       setIsSubmitting(false);
@@ -378,21 +403,16 @@ const Simulator = () => {
             <Label htmlFor="whatsapp" className="text-lg font-semibold text-primary text-center block mb-6">
               WhatsApp para contato
             </Label>
-            <InputMask
-              mask="(99) 99999-9999"
+            <Input
+              id="whatsapp"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
               value={formData.whatsapp}
-              onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-            >
-              {/* @ts-ignore */}
-              {(inputProps: any) => (
-                <Input
-                  {...inputProps}
-                  id="whatsapp"
-                  placeholder="(00) 00000-0000"
-                  className="text-lg p-6 text-center max-w-md mx-auto"
-                />
-              )}
-            </InputMask>
+              onChange={(e) => setFormData({ ...formData, whatsapp: formatWhatsapp(e.target.value) })}
+              placeholder="(00) 00000-0000"
+              className="text-lg p-6 text-center max-w-md mx-auto"
+            />
           </div>
         );
 
