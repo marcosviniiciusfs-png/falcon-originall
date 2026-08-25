@@ -2,7 +2,6 @@ interface EventPayload {
   event_name: "Lead";
   event_id: string;
   event_source_url: string;
-  lead_data: Record<string, unknown>;
   user_data?: {
     ph?: string;
     fn?: string;
@@ -20,8 +19,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const isEventPayload = (value: unknown): value is EventPayload => {
   if (!isRecord(value) || value.event_name !== "Lead") return false;
   return typeof value.event_id === "string" && value.event_id.length > 0 &&
-    typeof value.event_source_url === "string" && value.event_source_url.length > 0 &&
-    isRecord(value.lead_data);
+    typeof value.event_source_url === "string" && value.event_source_url.length > 0;
 };
 
 const json = (body: unknown, status = 200, headers: HeadersInit = {}) =>
@@ -115,38 +113,26 @@ export default {
       access_token: env.META_CAPI_ACCESS_TOKEN,
       };
 
-      const [leadResult, metaResult] = await Promise.allSettled([
-      fetch(env.LEAD_DESTINATION_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload.lead_data),
-      }),
-      fetch(`https://graph.facebook.com/${env.META_GRAPH_API_VERSION}/${env.META_PIXEL_ID}/events`, {
+      const metaResult = await fetch(`https://graph.facebook.com/${env.META_GRAPH_API_VERSION}/${env.META_PIXEL_ID}/events`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(metaBody),
-      }),
-      ]);
+      });
 
-      const leadStatus = leadResult.status === "fulfilled" ? leadResult.value.status : 0;
-      const metaStatus = metaResult.status === "fulfilled" ? metaResult.value.status : 0;
-      const leadSuccess = leadResult.status === "fulfilled" && leadResult.value.ok;
-      const metaSuccess = metaResult.status === "fulfilled" && metaResult.value.ok;
+      const metaStatus = metaResult.status;
+      const metaSuccess = metaResult.ok;
 
       console.log(JSON.stringify({
         message: "conversion event processed",
         event_id: payload.event_id,
-        lead_success: leadSuccess,
-        lead_status: leadStatus,
         meta_success: metaSuccess,
         meta_status: metaStatus,
       }));
 
       return json({
-        success: leadSuccess,
-        lead_webhook: { success: leadSuccess, status: leadStatus },
+        success: metaSuccess,
         meta: { success: metaSuccess, status: metaStatus },
-      }, leadSuccess ? 200 : 502, cors);
+      }, metaSuccess ? 200 : 502, cors);
     } catch (error) {
       console.error(JSON.stringify({
         message: "unhandled conversion API error",

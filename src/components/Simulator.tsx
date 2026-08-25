@@ -135,38 +135,14 @@ const Simulator = () => {
     setIsSubmitting(true);
     
     try {
-      // Formatar data no formato YYYY-MM-DD
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const dataEntrada = `${year}-${month}-${day}`;
-      
       const eventId = createEventId();
-      const endpoint = import.meta.env.VITE_META_CAPI_URL ||
-        "https://hook.us1.make.com/3s8saehot3tbxrg0gsohavxhag4bzjkh";
-      const webhookData = {
-        "Data de Entrada": dataEntrada,
-        "Nome Completo": formData.fullName,
-        "WhatsApp": formData.whatsapp,
-        "Tipo de Bem": formData.propertyType,
-        "Valor Pretendido (R$)": formData.creditAmount || "Não informado",
-        "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui entrada",
-        "Parcela Ideal (R$)": formData.monthlyPayment || "Não informado",
-        "Cidade": formData.city || "Não informado",
-        "Modalidade de Crédito": formData.creditModality || "Não informado",
-        origem: "simulador_falcon",
-        event_id: eventId,
-        source_url: window.location.href,
-        received_at: now.toISOString()
-      };
+      const endpoint = import.meta.env.VITE_META_CAPI_URL;
+      if (!endpoint) throw new Error("Endpoint de conversão não configurado.");
 
-      const isCapiEndpoint = Boolean(import.meta.env.VITE_META_CAPI_URL);
-      const payload = isCapiEndpoint ? {
+      const payload = {
         event_name: "Lead",
         event_id: eventId,
         event_source_url: window.location.href,
-        lead_data: webhookData,
         user_data: {
           ph: formData.whatsapp,
           fn: formData.fullName.trim().split(/\s+/)[0] || "",
@@ -179,8 +155,11 @@ const Simulator = () => {
           content_name: "Simulador Falcon",
           lead_type: "simulador_falcon",
           tipo_bem: formData.propertyType,
+          valor_pretendido: formData.creditAmount,
+          possui_entrada: formData.hasDownPayment,
+          modalidade_credito: formData.creditModality,
         },
-      } : webhookData;
+      };
 
       const response = await fetch(endpoint, {
         method: "POST",
