@@ -2,16 +2,14 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import falconLogo from "@/assets/falcon-logo-header.png";
+import { smoothScrollToSection } from "@/lib/scroll";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
+    smoothScrollToSection(id);
+    setIsMenuOpen(false);
   };
 
   return (

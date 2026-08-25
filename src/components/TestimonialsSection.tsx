@@ -22,6 +22,7 @@ import cliente18 from "@/assets/cliente-novo-18.jpeg";
 import cliente19 from "@/assets/cliente-novo-19.jpeg";
 import cliente20 from "@/assets/cliente-novo-20.jpeg";
 import cliente21 from "@/assets/cliente-novo-21.jpeg";
+import { smoothScrollToSection } from "@/lib/scroll";
 
 const TestimonialsSection = () => {
   const clientImages = [cliente1, cliente2, cliente3, cliente10, cliente11, cliente12, cliente13, cliente14, cliente15, cliente16, cliente17, cliente18, cliente19, cliente20, cliente21];
@@ -38,8 +39,7 @@ const TestimonialsSection = () => {
           </p>
           <Button 
             onClick={() => {
-              const element = document.getElementById("simulador");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
+              smoothScrollToSection("simulador");
             }}
             className="bg-primary hover:bg-primary-hover text-primary-foreground font-bold text-base px-8 py-6 rounded-lg shadow-lg"
           >

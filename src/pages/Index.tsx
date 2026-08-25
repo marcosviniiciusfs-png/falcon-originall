@@ -7,13 +7,11 @@ import CommentsSection from "@/components/CommentsSection";
 import Footer from "@/components/Footer";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import FaqSection from "@/components/FaqSection";
+import { smoothScrollToSection } from "@/lib/scroll";
 
 const Index = () => {
   const scrollToSimulator = () => {
-    const element = document.getElementById("simulador");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    smoothScrollToSection("simulador");
   };
 
   return (
@@ -22,10 +20,10 @@ const Index = () => {
       <main>
         <HeroSection onSimulateClick={scrollToSimulator} />
         <Simulator />
-        <BenefitsSection />
-        <HowItWorksSection />
         <TestimonialsSection />
         <CommentsSection />
+        <BenefitsSection />
+        <HowItWorksSection />
         <FaqSection />
       </main>
       <Footer />

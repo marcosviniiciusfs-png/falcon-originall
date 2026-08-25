@@ -8,10 +8,13 @@ import Index from "./pages/Index";
 import Obrigado from "./pages/Obrigado";
 import NotFound from "./pages/NotFound";
 import { initializeMetaPixel } from "./lib/meta";
+import { useScrollMomentum } from "./hooks/use-scroll-momentum";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  useScrollMomentum();
+
   useEffect(() => {
     initializeMetaPixel();
   }, []);

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { createEventId, trackLead } from "@/lib/meta";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -442,9 +443,18 @@ const Simulator = () => {
               <Progress value={progressInfo.progress} className="h-3" />
             </div>
 
-            <div className="min-h-[220px]">
-              {renderStep()}
-            </div>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -12, filter: "blur(8px)" }}
+                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                className="min-h-[220px]"
+              >
+                {renderStep()}
+              </motion.div>
+            </AnimatePresence>
 
             <div className="flex justify-between gap-4 pt-6">
               <Button
