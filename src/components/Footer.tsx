@@ -52,7 +52,7 @@ const Footer = () => {
 
         <div className="border-t border-white/20 pt-6 text-center">
           <p className="text-white/80 text-sm">
-            Copyright 2025 - Todos os direitos reservados por Falcon Empreendimentos
+            Copyright 2026 - Todos os direitos reservados por Falcon Empreendimentos
           </p>
         </div>
       </div>
