@@ -135,6 +135,7 @@ const Simulator = () => {
     setIsSubmitting(true);
     
     try {
+      const now = new Date();
       const eventId = createEventId();
       const endpoint = import.meta.env.VITE_META_CAPI_URL;
       if (!endpoint) throw new Error("Endpoint de conversão não configurado.");
@@ -143,6 +144,21 @@ const Simulator = () => {
         event_name: "Lead",
         event_id: eventId,
         event_source_url: window.location.href,
+        lead_data: {
+          "Data de Entrada": now.toISOString().slice(0, 10),
+          "Nome Completo": formData.fullName,
+          "WhatsApp": formData.whatsapp,
+          "Tipo de Bem": formData.propertyType,
+          "Valor Pretendido (R$)": formData.creditAmount || "Não informado",
+          "Valor de Entrada (R$)": formData.hasDownPayment === "Sim" ? formData.downPaymentAmount : "Não possui entrada",
+          "Parcela Ideal (R$)": formData.monthlyPayment || "Não informado",
+          "Cidade": formData.city || "Não informado",
+          "Modalidade de Crédito": formData.creditModality || "Não informado",
+          origem: "simulador_falcon",
+          event_id: eventId,
+          source_url: window.location.href,
+          received_at: now.toISOString(),
+        },
         user_data: {
           ph: formData.whatsapp,
           fn: formData.fullName.trim().split(/\s+/)[0] || "",

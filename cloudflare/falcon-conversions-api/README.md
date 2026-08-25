@@ -1,11 +1,12 @@
 # Falcon Conversions API
 
-Worker intermediário entre o simulador e a Meta Conversions API.
+Worker intermediário entre o simulador, o webhook de leads e a Meta Conversions API.
 
 Secrets obrigatórios, cadastrados pelo Wrangler e nunca versionados:
 
 ```sh
 npx wrangler secret put META_CAPI_ACCESS_TOKEN --config cloudflare/falcon-conversions-api/wrangler.jsonc
+npx wrangler secret put LEAD_WEBHOOK_URL --config cloudflare/falcon-conversions-api/wrangler.jsonc
 ```
 
 Deploy e validação:
