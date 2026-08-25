@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import falconLogo from "@/assets/falcon-logo-header.png";
 import { smoothScrollToSection } from "@/lib/scroll";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const whatsappUrl = "https://wa.me/5541992648895?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Falcon%20e%20quero%20fazer%20uma%20simula%C3%A7%C3%A3o.";
 
   const scrollToSection = (id: string) => {
     smoothScrollToSection(id);
@@ -45,6 +46,12 @@ const Header = () => {
           >
             Contato
           </button>
+          <Button asChild className="bg-white text-primary hover:bg-white/90 font-semibold">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              WhatsApp
+            </a>
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -86,6 +93,12 @@ const Header = () => {
             >
               Contato
             </button>
+            <Button asChild className="bg-white text-primary hover:bg-white/90 font-semibold mt-1">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)}>
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Falar no WhatsApp
+              </a>
+            </Button>
           </nav>
         </div>
       )}

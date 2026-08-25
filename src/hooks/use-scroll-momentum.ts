@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 
 const ENABLE_WHEEL_MOMENTUM = true;
-const WHEEL_LERP = 0.055;
+const WHEEL_LERP = 0.065;
 const SETTLE_DISTANCE = 0.45;
 
 declare global {
