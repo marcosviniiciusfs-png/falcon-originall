@@ -1,4 +1,4 @@
-const META_PIXEL_ID = "1197021958481791";
+const META_PIXEL_ID = "1528207522323512";
 
 type Fbq = (
   action: "init" | "track",

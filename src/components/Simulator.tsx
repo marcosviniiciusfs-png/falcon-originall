@@ -28,6 +28,13 @@ interface SimulatorData {
   whatsapp: string;
 }
 
+const getCookie = (name: string) =>
+  document.cookie
+    .split(";")
+    .map((item) => item.trim())
+    .find((item) => item.startsWith(`${name}=`))
+    ?.slice(name.length + 1);
+
 const Simulator = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -165,6 +172,8 @@ const Simulator = () => {
           fn: formData.fullName.trim().split(/\s+/)[0] || "",
           ln: formData.fullName.trim().split(/\s+/).slice(1).join(" "),
           ct: formData.city,
+          fbp: getCookie("_fbp"),
+          fbc: getCookie("_fbc"),
         },
         custom_data: {
           content_name: "Simulador Falcon",
