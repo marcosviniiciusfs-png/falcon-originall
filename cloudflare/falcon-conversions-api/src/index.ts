@@ -14,6 +14,19 @@ interface EventPayload {
   custom_data?: Record<string, unknown>;
 }
 
+interface MetaConversionResponse {
+  events_received?: number;
+  messages?: unknown[];
+  fbtrace_id?: string;
+  error?: {
+    message?: string;
+    type?: string;
+    code?: number;
+    error_subcode?: number;
+    fbtrace_id?: string;
+  };
+}
+
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
@@ -131,7 +144,16 @@ export default {
       const webhookStatus = webhookResult.status === "fulfilled" ? webhookResult.value.status : 0;
       const webhookSuccess = webhookResult.status === "fulfilled" && webhookResult.value.ok;
       const metaStatus = metaResult.status === "fulfilled" ? metaResult.value.status : 0;
-      const metaSuccess = metaResult.status === "fulfilled" && metaResult.value.ok;
+      let metaResponse: MetaConversionResponse = {};
+      if (metaResult.status === "fulfilled") {
+        try {
+          metaResponse = await metaResult.value.json() as MetaConversionResponse;
+        } catch {
+          metaResponse = {};
+        }
+      }
+      const eventsReceived = metaResponse.events_received ?? 0;
+      const metaSuccess = metaResult.status === "fulfilled" && metaResult.value.ok && eventsReceived > 0;
 
       console.log(JSON.stringify({
         message: "conversion event processed",
@@ -140,12 +162,23 @@ export default {
         webhook_status: webhookStatus,
         meta_success: metaSuccess,
         meta_status: metaStatus,
+        meta_events_received: eventsReceived,
+        meta_messages: metaResponse.messages ?? [],
+        meta_error: metaResponse.error ?? null,
+        meta_fbtrace_id: metaResponse.fbtrace_id ?? metaResponse.error?.fbtrace_id ?? null,
       }));
 
       return json({
         success: webhookSuccess,
         webhook: { success: webhookSuccess, status: webhookStatus },
-        meta: { success: metaSuccess, status: metaStatus },
+        meta: {
+          success: metaSuccess,
+          status: metaStatus,
+          events_received: eventsReceived,
+          messages: metaResponse.messages ?? [],
+          error: metaResponse.error ?? null,
+          fbtrace_id: metaResponse.fbtrace_id ?? metaResponse.error?.fbtrace_id ?? null,
+        },
       }, webhookSuccess ? 200 : 502, cors);
     } catch (error) {
       console.error(JSON.stringify({
